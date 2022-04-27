@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:carlock/model/match.dart';
 import 'package:carlock/services/matches.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'matches_event.dart';
 part 'matches_state.dart';

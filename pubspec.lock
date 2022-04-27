@@ -445,6 +445,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
+  print_color:
+    dependency: "direct main"
+    description:
+      name: print_color
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.5"
   process:
     dependency: transitive
     description:

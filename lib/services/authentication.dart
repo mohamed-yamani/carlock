@@ -16,15 +16,11 @@ class AuthenticationService {
   }
 
   Future<String?> authenticate(String username, String password) async {
-    
     final success = await AuthRepository().login(username, password);
-    print('\x1B[36m username $username password $password \x1B[0m');
 
     if (success) {
-      print('\x1B[32m success $success \x1B[0m');
       return username;
     } else {
-      print('\x1B[31m success $success \x1B[0m');
       return null;
     }
   }

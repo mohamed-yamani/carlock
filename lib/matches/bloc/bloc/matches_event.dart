@@ -7,8 +7,7 @@ abstract class MatchesEvent extends Equatable {
 class LoadMatchesEvent extends MatchesEvent {
   final String username;
 
-  LoadMatchesEvent(this.username);
+  const LoadMatchesEvent(this.username);
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }

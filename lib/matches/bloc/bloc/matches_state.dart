@@ -9,19 +9,23 @@ class MatchesInitial extends MatchesState {
   List<Object> get props => [];
 }
 
+class MatchesLoadingState extends MatchesState {
+  @override
+  List<Object> get props => [];
+}
+
 class MatchesLoadedState extends MatchesState {
   final List<MatchModel> matches;
   final String username;
 
-  MatchesLoadedState(
+  const MatchesLoadedState(
     this.matches,
     this.username,
   );
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         matches,
-        this.username,
+        username,
       ];
 }

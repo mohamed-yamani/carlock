@@ -1,25 +1,22 @@
 import 'dart:convert';
+import 'package:carlock/model/matches_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:print_color/print_color.dart';
 
 class AuthRepository {
-  Future<List> getMathesFromWe() async {
+  Future<MatchesModel> getMathesFromWe() async {
+    late MatchesModel matches;
     var myUrl = Uri.parse("https://matricule.icebergtech.net/api/match/");
 
-    http.Response response = await http.get(myUrl, headers: {
+    final response = await http.get(myUrl, headers: {
       'Accept': 'application/json',
-      "authorization": "Bearer " + "babcc1fef4eada4129bc0976367ffaba84a30fb8",
+      "authorization": "Bearer " "babcc1fef4eada4129bc0976367ffaba84a30fb8",
     });
 
-    String source = Utf8Decoder().convert(response.bodyBytes);
-    print(json.decode(source));
-
     if (response.statusCode == 200) {
-      final responseJson = json.decode(response.body);
-      final token = responseJson['token'];
-      return json.decode(source);
+      return MatchesModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to login');
-      return [];
     }
   }
 }
