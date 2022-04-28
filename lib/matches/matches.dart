@@ -2,20 +2,34 @@ import 'package:carlock/matches/bloc/bloc/matches_bloc.dart';
 import 'package:carlock/matches/nav_bar.dart';
 import 'package:carlock/model/matches_model.dart';
 import 'package:carlock/services/matches.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MatchesPage extends StatelessWidget {
-  const MatchesPage({Key? key, @required this.username}) : super(key: key);
-
-  final String? username;
+  const MatchesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavBar(),
       appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white,
+                size: 25,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
         centerTitle: true,
         title: const Text(
           'HISTORIQUE DES MATCHES',
@@ -28,7 +42,7 @@ class MatchesPage extends StatelessWidget {
       body: BlocProvider(
         create: (context) =>
             MatchesBloc(RepositoryProvider.of<MatchesServices>(context))
-              ..add(LoadMatchesEvent(username ?? '')),
+              ..add(const LoadMatchesEvent('')),
         child: BlocBuilder<MatchesBloc, MatchesState>(
           builder: (context, state) {
             if (state is MatchesLoadingState) {
@@ -120,10 +134,10 @@ class _getCard extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(50)),
-                      child: const Center(
+                      child: Center(
                         child: Icon(
                           Icons.location_on_outlined,
-                          color: Colors.grey,
+                          color: Theme.of(context).primaryColor,
                           size: 30,
                         ),
                       ),

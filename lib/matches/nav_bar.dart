@@ -1,3 +1,4 @@
+import 'package:carlock/repository/save_get_token.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,6 +8,8 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+     
+      backgroundColor: Colors.black.withOpacity(0.5),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -15,6 +18,7 @@ class NavBar extends StatelessWidget {
               'carlock',
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
+            arrowColor: Colors.black,
             accountEmail: const Text('myamani@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
@@ -37,8 +41,10 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.group),
-            title: const Text('Liste des utilisateurs'),
+            leading: Icon(Icons.group, color: Theme.of(context).primaryColor),
+            title: Text('Liste des utilisateurs',
+                style: TextStyle(
+                    fontSize: 18, color: Theme.of(context).primaryColorLight)),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/users');
@@ -52,8 +58,10 @@ class NavBar extends StatelessWidget {
             indent: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Mon profil'),
+            leading: Icon(Icons.person, color: Theme.of(context).primaryColor),
+            title: Text('Mon profil',
+                style: TextStyle(
+                    fontSize: 18, color: Theme.of(context).primaryColorLight)),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/profile');
@@ -67,8 +75,10 @@ class NavBar extends StatelessWidget {
             indent: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('A propos'),
+            leading: Icon(Icons.info, color: Theme.of(context).primaryColor),
+            title: Text('A propos',
+                style: TextStyle(
+                    fontSize: 18, color: Theme.of(context).primaryColorLight)),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/about');
@@ -82,8 +92,10 @@ class NavBar extends StatelessWidget {
             indent: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.phone),
-            title: const Text('Contact'),
+            leading: Icon(Icons.phone, color: Theme.of(context).primaryColor),
+            title: Text('Contact',
+                style: TextStyle(
+                    fontSize: 18, color: Theme.of(context).primaryColorLight)),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/contact');
@@ -95,6 +107,22 @@ class NavBar extends StatelessWidget {
             color: Colors.grey,
             endIndent: 20,
             indent: 20,
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.36,
+          ),
+          Center(
+            child: ListTile(
+              leading: Icon(Icons.exit_to_app,
+                  color: Theme.of(context).primaryColor),
+              title: const Text('Déconnexion',
+                  style: TextStyle(fontSize: 18, color: Colors.red)),
+              onTap: () async {
+                await deleteToken();
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/home');
+              },
+            ),
           ),
         ],
       ),

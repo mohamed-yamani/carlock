@@ -1,19 +1,39 @@
+import 'package:carlock/about/about_page.dart';
 import 'package:carlock/home/home.dart';
 import 'package:carlock/matches/matches.dart';
 import 'package:carlock/model/match.dart';
+import 'package:carlock/model/token.dart';
+import 'package:carlock/profile/profile_page.dart';
+import 'package:carlock/repository/save_get_token.dart';
 import 'package:carlock/services/authentication.dart';
 import 'package:carlock/services/matches.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:print_color/print_color.dart';
 
 Future<void> main() async {
+  bool isLoggedIn = true;
   await Hive.initFlutter(); //!hive init
-  runApp(const MyApp());
+  Hive.registerAdapter(TokenModelAdapter()); //!hive register adapter
+  if (await getToken() == null) {
+    isLoggedIn = false;
+  } else {
+    isLoggedIn = true;
+  }
+  try {
+    await getToken();
+  } catch (e) {
+    isLoggedIn = false;
+  }
+  runApp(MyApp(
+    isLoggedIn: isLoggedIn,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  late bool? isLoggedIn;
+  MyApp({this.isLoggedIn});
 
   // This widget is the root of your application.
 
@@ -31,20 +51,18 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
+          primaryColorLight: Colors.white,
+          primaryColorDark: Colors.black,
           primarySwatch: Colors.deepOrange,
         ),
-        home: HomePage(),
+        // home: HomePage(),
+        home: (isLoggedIn == false) ? HomePage() : MatchesPage(),
         routes: {
-          '/matches': (context) => MatchesPage(),
+          '/matches': (context) => const MatchesPage(),
+          '/home': (context) => HomePage(),
+          '/profile': (context) => const ProfilePage(),
+          '/about': (context) => const AboutPage(),
+          '/contact': (context) => const AboutPage(),
         },
       ),
     );
