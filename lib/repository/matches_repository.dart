@@ -3,7 +3,7 @@ import 'package:carlock/model/matches_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:print_color/print_color.dart';
 
-class AuthRepository {
+class MatchesRepository {
   Future<MatchesModel> getMathesFromWe() async {
     late MatchesModel matches;
     var myUrl = Uri.parse("https://matricule.icebergtech.net/api/match/");

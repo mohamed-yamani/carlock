@@ -1,4 +1,5 @@
 import 'package:carlock/home/bloc/bloc/home_bloc.dart';
+import 'package:carlock/matches/bloc/bloc/matches_bloc.dart';
 import 'package:carlock/matches/matches.dart';
 import 'package:carlock/services/authentication.dart';
 import 'package:carlock/services/matches.dart';
@@ -23,14 +24,6 @@ class HomePage extends StatelessWidget {
         child: BlocConsumer<HomeBloc, HomeState>(
           listener: (context, state) {
             if (state is SuccessfulLoginState) {
-              print('\x1B[33m username: ${state.username} \x1B[0m');
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => MatchesPage(username: state.username),
-              //   ),
-              // );
-
               Navigator.pushReplacementNamed(context, '/matches',
                   arguments: state.username);
             }
@@ -43,6 +36,11 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: 200,
+                      ),
+                      const SizedBox(height: 40),
                       TextField(
                         decoration: const InputDecoration(
                           icon: Icon(Icons.person),

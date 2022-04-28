@@ -15,17 +15,25 @@ class MatchesLoadingState extends MatchesState {
 }
 
 class MatchesLoadedState extends MatchesState {
-  final List<MatchModel> matches;
-  final String username;
+  final MatchesModel matches;
 
   const MatchesLoadedState(
     this.matches,
-    this.username,
   );
 
   @override
   List<Object?> get props => [
         matches,
-        username,
+      ];
+}
+
+class MatchesErrorState extends MatchesState {
+  final String error;
+
+  const MatchesErrorState(this.error);
+
+  @override
+  List<Object?> get props => [
+        error,
       ];
 }
