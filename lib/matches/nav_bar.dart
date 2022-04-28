@@ -8,7 +8,6 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-     
       backgroundColor: Colors.black.withOpacity(0.5),
       child: ListView(
         padding: EdgeInsets.zero,
@@ -16,7 +15,7 @@ class NavBar extends StatelessWidget {
           UserAccountsDrawerHeader(
             accountName: const Text(
               'carlock',
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.transparent, fontSize: 20),
             ),
             arrowColor: Colors.black,
             accountEmail: const Text('myamani@gmail.com'),
@@ -33,9 +32,7 @@ class NavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               image: const DecorationImage(
-                image: NetworkImage(
-                  'https://images.unsplash.com/photo-1589131318533-47b311b8fd57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1090&q=80',
-                ),
+                image: AssetImage('assets/images/sidebar.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -109,20 +106,19 @@ class NavBar extends StatelessWidget {
             indent: 20,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.36,
+            height: MediaQuery.of(context).size.height * 0.38,
           ),
-          Center(
-            child: ListTile(
-              leading: Icon(Icons.exit_to_app,
-                  color: Theme.of(context).primaryColor),
-              title: const Text('Déconnexion',
-                  style: TextStyle(fontSize: 18, color: Colors.red)),
-              onTap: () async {
-                await deleteToken();
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/home');
-              },
-            ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app,
+                size: 30, color: Theme.of(context).primaryColor),
+            title: Text('Déconnexion',
+                style: TextStyle(
+                    fontSize: 18, color: Theme.of(context).primaryColor)),
+            onTap: () async {
+              await deleteToken();
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed('/home');
+            },
           ),
         ],
       ),

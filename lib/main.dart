@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
           primaryColorLight: Colors.white,
           primaryColorDark: Colors.black,
           primarySwatch: Colors.deepOrange,
+          fontFamily: 'Georgia',
         ),
         // home: HomePage(),
         home: (isLoggedIn == false) ? HomePage() : MatchesPage(),
