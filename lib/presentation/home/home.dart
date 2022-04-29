@@ -1,10 +1,7 @@
-import 'package:carlock/home/bloc/bloc/home_bloc.dart';
-import 'package:carlock/matches/bloc/bloc/matches_bloc.dart';
-import 'package:carlock/matches/matches.dart';
+import 'package:carlock/presentation/home/bloc/bloc/home_bloc.dart';
 import 'package:carlock/services/authentication.dart';
 import 'package:carlock/services/matches.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {

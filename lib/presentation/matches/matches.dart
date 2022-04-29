@@ -1,5 +1,6 @@
-import 'package:carlock/matches/bloc/bloc/matches_bloc.dart';
-import 'package:carlock/matches/nav_bar.dart';
+import 'package:carlock/presentation/map/map.dart';
+import 'package:carlock/presentation/matches/bloc/bloc/matches_bloc.dart';
+import 'package:carlock/presentation/matches/nav_bar.dart';
 import 'package:carlock/model/matches_model.dart';
 import 'package:carlock/services/matches.dart';
 import 'package:flutter/gestures.dart';
@@ -46,10 +47,15 @@ class MatchesPage extends StatelessWidget {
         child: BlocBuilder<MatchesBloc, MatchesState>(
           builder: (context, state) {
             if (state is MatchesLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.red,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ));
             }
+
             if (state is MatchesLoadedState) {
               return ListView(children: [
                 ...state.matches.results!.map((result) {
@@ -128,17 +134,24 @@ class _getCard extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Center(
-                        child: Icon(
-                          Icons.location_on_outlined,
-                          color: Theme.of(context).primaryColor,
-                          size: 30,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          '/map_page',
+                        );
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Center(
+                          child: Icon(
+                            Icons.location_on_outlined,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
+                          ),
                         ),
                       ),
                     ),

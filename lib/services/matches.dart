@@ -7,7 +7,11 @@ class MatchesServices {
   late Box<MatchModel> _matchBox;
 
   Future<void> init() async {
-    Hive.registerAdapter(MatchModelAdapter());
+    try {
+      Hive.registerAdapter(MatchModelAdapter());
+    } catch (e) {
+      print(e.toString());
+    }
     _matchBox = await Hive.openBox('matches');
 
     await _matchBox.clear();
@@ -26,12 +30,5 @@ class MatchesServices {
     } catch (e) {
       throw Exception(e.toString());
     }
-    // ! old code
-    // return [
-    //   MatchModel('testuser1', '1337 future is loading', '2020-01-01'),
-    //   MatchModel('testuser2', '42 born to code', '2018-01-02'),
-    //   MatchModel(username, 'I am a match', '2020-01-01'),
-    //   MatchModel('testuser3', 'I am a match', '2020-01-01'),
-    // ];
   }
 }

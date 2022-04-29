@@ -6,9 +6,12 @@ class AuthenticationService {
   late Box<User> _userBox;
 
   Future<void> init() async {
-    Hive.registerAdapter(UserAdapter());
-    _userBox = await Hive.openBox('users');
-
+    try {
+      Hive.registerAdapter(UserAdapter());
+    } catch (e) {
+      print(e.toString());
+    }
+    _userBox = await Hive.openBox('user');
     await _userBox.clear();
 
     await _userBox.add(User('user', 'password'));

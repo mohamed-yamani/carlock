@@ -1,9 +1,12 @@
-import 'package:carlock/about/about_page.dart';
-import 'package:carlock/home/home.dart';
-import 'package:carlock/matches/matches.dart';
 import 'package:carlock/model/match.dart';
 import 'package:carlock/model/token.dart';
-import 'package:carlock/profile/profile_page.dart';
+import 'package:carlock/presentation/about/about_page.dart';
+import 'package:carlock/presentation/contact/contact_page.dart';
+import 'package:carlock/presentation/home/home.dart';
+import 'package:carlock/presentation/map/map.dart';
+import 'package:carlock/presentation/matches/bloc/bloc/matches_bloc.dart';
+import 'package:carlock/presentation/matches/matches.dart';
+import 'package:carlock/presentation/profile/profile_page.dart';
 import 'package:carlock/repository/save_get_token.dart';
 import 'package:carlock/services/authentication.dart';
 import 'package:carlock/services/matches.dart';
@@ -31,12 +34,18 @@ Future<void> main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   late bool? isLoggedIn;
-  MyApp({this.isLoggedIn});
+  MyApp({Key? key, this.isLoggedIn}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final MatchesBloc matchesBloc = MatchesBloc(MatchesServices());
 
   // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -56,16 +65,30 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepOrange,
           fontFamily: 'Georgia',
         ),
-        // home: HomePage(),
-        home: (isLoggedIn == false) ? HomePage() : MatchesPage(),
         routes: {
-          '/matches': (context) => const MatchesPage(),
+          '/': (context) =>
+              (widget.isLoggedIn == false) ? HomePage() : const MatchesPage(),
           '/home': (context) => HomePage(),
           '/profile': (context) => const ProfilePage(),
           '/about': (context) => const AboutPage(),
-          '/contact': (context) => const AboutPage(),
+          '/contact': (context) => const ContactPage(),
+          '/matches': (context) => BlocProvider.value(
+                value: matchesBloc,
+                child: const MatchesPage(),
+              ),
+          '/map_page': (context) => BlocProvider.value(
+                value: matchesBloc,
+                child: const MapPage(),
+              ),
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    matchesBloc.close();
+    super.dispose();
   }
 }
