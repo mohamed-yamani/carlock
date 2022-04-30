@@ -35,7 +35,7 @@ class MatchesPage extends StatelessWidget {
         title: const Text(
           'HISTORIQUE DES MATCHES',
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -68,11 +68,29 @@ class MatchesPage extends StatelessWidget {
               ]);
             }
             if (state is MatchesErrorState) {
-              return Center(
-                child: Text(state.error,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20, color: Theme.of(context).errorColor)),
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 60,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Text(
+                        state.error,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 17, color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
             return Container();
@@ -99,13 +117,13 @@ class _getCard extends StatelessWidget {
                   children: const [
                     Icon(
                       Icons.access_time_outlined,
-                      size: 25,
+                      size: 20,
                       color: Colors.black,
                     ),
                     SizedBox(width: 10),
                     Text(
                       '15 avril 2020, a 16h00',
-                      style: TextStyle(color: Colors.black, fontSize: 18),
+                      style: TextStyle(color: Colors.black, fontSize: 14),
                     ),
                   ],
                 ),
@@ -133,7 +151,7 @@ class _getCard extends StatelessWidget {
                     Text(
                       '${result.matriculeStr}',
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     InkWell(
                       onTap: () {

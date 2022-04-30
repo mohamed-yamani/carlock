@@ -19,7 +19,7 @@ class ProfilePage extends StatelessWidget {
           },
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
-        title: const Text('Profile'),
+        title: const Text('Profile', style: TextStyle(fontSize: 13)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

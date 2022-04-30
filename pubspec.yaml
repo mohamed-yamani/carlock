@@ -85,7 +85,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-
+  fonts:
+    - family: Inconsolata
+      fonts:
+        - asset: assets/fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf
+          weight: 400
+          style: normal
+        
   # fonts:
   #   - family: Schyler
   #     fonts:

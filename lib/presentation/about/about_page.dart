@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
           },
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
-        title: const Text('About'),
+        title: const Text('About', style: TextStyle(fontSize: 13)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

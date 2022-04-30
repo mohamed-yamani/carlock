@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             if (state is FailedLoginState) {
               Print.red(state.error);
               Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text(state.error),
+                content: Text(state.error.replaceAll('Exception: ', '')),
               ));
             }
           },
@@ -56,12 +56,15 @@ class HomePage extends StatelessWidget {
                         obscureText: true,
                         decoration: const InputDecoration(
                           icon: Icon(Icons.security),
-                          hintText: 'mot de passe',
+                          hintText: 'Mot de passe',
                         ),
                         controller: passwordController,
                       ),
                       ElevatedButton(
-                        child: const Text('Login'),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 30.0),
+                          child: Text('Login'),
+                        ),
                         onPressed: () {
                           BlocProvider.of<HomeBloc>(context).add(
                             LoginEvent(
@@ -69,6 +72,7 @@ class HomePage extends StatelessWidget {
                               passwordController.text,
                             ),
                           );
+
                           // Navigator.pushReplacementNamed(context, '/home');
                         },
                       ),

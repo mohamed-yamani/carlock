@@ -1,4 +1,3 @@
-import 'package:carlock/model/match.dart';
 import 'package:carlock/model/token.dart';
 import 'package:carlock/presentation/about/about_page.dart';
 import 'package:carlock/presentation/contact/contact_page.dart';
@@ -13,7 +12,6 @@ import 'package:carlock/services/matches.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:print_color/print_color.dart';
 
 Future<void> main() async {
   bool isLoggedIn = true;
@@ -63,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           primaryColorLight: Colors.white,
           primaryColorDark: Colors.black,
           primarySwatch: Colors.deepOrange,
-          fontFamily: 'Georgia',
+          fontFamily: 'Inconsolata',
         ),
         routes: {
           '/': (context) =>

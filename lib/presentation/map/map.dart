@@ -34,7 +34,7 @@ class _MapPageState extends State<MapPage> {
         title: const Text(
           'CARTE',
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: FontWeight.bold,
           ),
         ),

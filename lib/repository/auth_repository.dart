@@ -6,6 +6,15 @@ import 'package:print_color/print_color.dart';
 class AuthRepository {
   Future<bool> login(String username, String password) async {
     late final response;
+
+    if (username.isEmpty || password.isEmpty) {
+      throw Exception('Username or password is empty');
+    }
+
+    if (username.length < 3 || password.length < 3) {
+      throw Exception('Username or password is too short');
+    }
+
     try {
       response = await http.post(
         Uri.parse('https://matricule.icebergtech.net/api/token-auth/'),

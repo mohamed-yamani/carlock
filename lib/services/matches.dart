@@ -12,7 +12,7 @@ class MatchesServices {
     // return matches;
     try {
       return matches;
-    } catch (e) {
+    } on Exception catch (e) {
       throw Exception(e.toString());
     }
   }
