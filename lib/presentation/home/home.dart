@@ -3,6 +3,7 @@ import 'package:carlock/services/authentication.dart';
 import 'package:carlock/services/matches.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:print_color/print_color.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -24,9 +25,15 @@ class HomePage extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/matches',
                   arguments: state.username);
             }
+            if (state is FailedLoginState) {
+              Print.red(state.error);
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text(state.error),
+              ));
+            }
           },
           builder: (context, state) {
-            if (state is HomeInitial) {
+            if (state is HomeInitial || state is FailedLoginState) {
               return SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

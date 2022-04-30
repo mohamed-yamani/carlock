@@ -8,15 +8,18 @@ class MatchesRepository {
     late MatchesModel matches;
     var myUrl = Uri.parse("https://matricule.icebergtech.net/api/match/");
 
-    final response = await http.get(myUrl, headers: {
-      'Accept': 'application/json',
-      "authorization": "Bearer " "babcc1fef4eada4129bc0976367ffaba84a30fb8",
-    });
-
-    if (response.statusCode == 200) {
-      return MatchesModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to login');
+    try {
+      final response = await http.get(myUrl, headers: {
+        'Accept': 'application/json',
+        "authorization": "Bearer " "babcc1fef4eada4129bc0976367ffaba84a30fb8",
+      });
+      if (response.statusCode == 200) {
+        return MatchesModel.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to login');
+      }
+    } catch (e) {
+      throw 'please check your internet connection';
     }
   }
 }

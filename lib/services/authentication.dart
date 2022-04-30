@@ -19,12 +19,12 @@ class AuthenticationService {
   }
 
   Future<String?> authenticate(String username, String password) async {
-    final success = await AuthRepository().login(username, password);
+    try {
+      await AuthRepository().login(username, password);
 
-    if (success) {
       return username;
-    } else {
-      return null;
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

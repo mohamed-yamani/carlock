@@ -13,18 +13,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._auth, this._matchesService)
       : super(RegisteringServiceState()) {
     on<LoginEvent>((event, emitter) async {
-      final user = await _auth.authenticate(event.username, event.password);
-      if (user != null) {
-        emit(SuccessfulLoginState(user));
+      try {
+        final user = await _auth.authenticate(event.username, event.password);
+        emit(SuccessfulLoginState(user!));
         emit(HomeInitial());
-      } else {
-        
+      } catch (e) {
+        emit(FailedLoginState(e.toString()));
+        emit(HomeInitial());
       }
     });
 
     on<RegisteringServiceEvent>((event, emitter) async {
       await _auth.init();
-      await _matchesService.init();
       emit(const HomeInitial());
     });
   }

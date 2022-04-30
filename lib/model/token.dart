@@ -6,6 +6,8 @@ part 'token.g.dart';
 class TokenModel extends HiveObject {
   @HiveField(0)
   final String token;
+  @HiveField(1)
+  final String user;
 
-  TokenModel(this.token);
+  TokenModel(this.token, this.user);
 }

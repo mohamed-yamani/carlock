@@ -19,13 +19,13 @@ Future<void> main() async {
   bool isLoggedIn = true;
   await Hive.initFlutter(); //!hive init
   Hive.registerAdapter(TokenModelAdapter()); //!hive register adapter
-  if (await getToken() == null) {
-    isLoggedIn = false;
-  } else {
-    isLoggedIn = true;
-  }
   try {
-    await getToken();
+    TokenModel? user = await getToken();
+    if (user!.token == null) {
+      isLoggedIn = false;
+    } else {
+      isLoggedIn = true;
+    }
   } catch (e) {
     isLoggedIn = false;
   }

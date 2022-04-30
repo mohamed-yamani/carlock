@@ -1,11 +1,8 @@
-import 'package:carlock/presentation/map/map.dart';
 import 'package:carlock/presentation/matches/bloc/bloc/matches_bloc.dart';
 import 'package:carlock/presentation/matches/nav_bar.dart';
 import 'package:carlock/model/matches_model.dart';
 import 'package:carlock/services/matches.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MatchesPage extends StatelessWidget {
@@ -14,7 +11,10 @@ class MatchesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavBar(),
+      drawer: BlocProvider.value(
+        value: MatchesBloc(MatchesServices()),
+        child: const NavBar(),
+      ),
       appBar: AppBar(
         leading: Builder(
           builder: (BuildContext context) {
@@ -50,7 +50,7 @@ class MatchesPage extends StatelessWidget {
               return Container(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.red,
+                  color: Theme.of(context).primaryColorLight,
                   child: const Center(
                     child: CircularProgressIndicator(),
                   ));
@@ -70,6 +70,7 @@ class MatchesPage extends StatelessWidget {
             if (state is MatchesErrorState) {
               return Center(
                 child: Text(state.error,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20, color: Theme.of(context).errorColor)),
               );
@@ -123,7 +124,7 @@ class _getCard extends StatelessWidget {
                         CircleAvatar(
                           backgroundColor: Colors.grey,
                           backgroundImage: NetworkImage(
-                            'https://www.ssc.edu/wp-content/uploads/2014/08/silhouette-man.jpg',
+                            'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
                           ),
                           radius: 25,
                         ),
@@ -140,20 +141,27 @@ class _getCard extends StatelessWidget {
                           '/map_page',
                         );
                       },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Center(
-                          child: Icon(
-                            Icons.location_on_outlined,
-                            color: Theme.of(context).primaryColor,
-                            size: 30,
-                          ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        backgroundImage: NetworkImage(
+                          'https://img.phonandroid.com/2016/04/comment-utiliser-google-maps-gps.jpg',
                         ),
+                        radius: 25,
                       ),
+                      // child: Container(
+                      //   width: 40,
+                      //   height: 40,
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.white,
+                      //       borderRadius: BorderRadius.circular(50)),
+                      //   child: Center(
+                      //     child: Icon(
+                      //       Icons.location_on_outlined,
+                      //       color: Theme.of(context).primaryColor,
+                      //       size: 30,
+                      //     ),
+                      //   ),
+                      // ),
                     ),
                   ],
                 ),

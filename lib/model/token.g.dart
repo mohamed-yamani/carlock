@@ -18,15 +18,18 @@ class TokenModelAdapter extends TypeAdapter<TokenModel> {
     };
     return TokenModel(
       fields[0] as String,
+      fields[1] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, TokenModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.token);
+      ..write(obj.token)
+      ..writeByte(1)
+      ..write(obj.user);
   }
 
   @override

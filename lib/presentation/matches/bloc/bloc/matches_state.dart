@@ -16,9 +16,11 @@ class MatchesLoadingState extends MatchesState {
 
 class MatchesLoadedState extends MatchesState {
   final MatchesModel matches;
+  final TokenModel? user;
 
   const MatchesLoadedState(
     this.matches,
+    this.user,
   );
 
   @override

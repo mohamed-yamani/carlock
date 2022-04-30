@@ -25,3 +25,12 @@ class RegisteringServiceState extends HomeState {
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class FailedLoginState extends HomeState {
+  final String error;
+
+  const FailedLoginState(this.error);
+
+  @override
+  List<Object?> get props => [error];
+}

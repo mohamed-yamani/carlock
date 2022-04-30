@@ -33,6 +33,8 @@ dependencies:
   equatable:
   hive:
   hive_flutter:
+  animated_text_kit: 
+  connectivity_plus: ^2.3.0 
   flutter:
     sdk: flutter
   
