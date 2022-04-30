@@ -134,7 +134,7 @@ class NavBar extends StatelessWidget {
         style: TextStyle(color: Colors.transparent, fontSize: 20),
       ),
       arrowColor: Colors.black,
-      accountEmail: const Text('.'),
+      accountEmail: const Text('_'),
       currentAccountPicture: CircleAvatar(
         child: ClipOval(
           child: Image.network(
@@ -162,21 +162,14 @@ class NavBar extends StatelessWidget {
         style: TextStyle(color: Colors.transparent, fontSize: 20),
       ),
       arrowColor: Colors.black,
-      accountEmail: AnimatedTextKit(
-        animatedTexts: [
-          WavyAnimatedText(
-            'Hello ${state.user.user}',
-            textStyle: TextStyle(
-                fontSize: 18, color: Theme.of(context).primaryColorLight),
-          ),
-          WavyAnimatedText('Look at Mercedes-AMG',
-              textStyle: TextStyle(
-                  fontSize: 17, color: Theme.of(context).primaryColor)),
-        ],
-        isRepeatingAnimation: true,
-        onTap: () {
-          print("Tap Event");
-        },
+      accountEmail: DefaultTextStyle(
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+        child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
+          TypewriterAnimatedText(
+              'Hello ${state.user.user[0].toUpperCase() + state.user.user.substring(1)}'),
+        ]),
       ),
       currentAccountPicture: CircleAvatar(
         child: ClipOval(

@@ -32,6 +32,7 @@ dependencies:
   flutter_bloc:
   equatable:
   hive:
+  cached_network_image: 
   hive_flutter:
   animated_text_kit: 
   connectivity_plus: ^2.3.0 

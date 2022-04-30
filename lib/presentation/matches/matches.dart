@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carlock/presentation/matches/bloc/bloc/matches_bloc.dart';
 import 'package:carlock/presentation/matches/nav_bar.dart';
 import 'package:carlock/model/matches_model.dart';
@@ -128,11 +129,16 @@ class _getCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Image(
-                    image: NetworkImage(result.picture ??
-                        'https://us.123rf.com/450wm/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg'),
-                    width: double.infinity,
-                    fit: BoxFit.cover),
+                
+                CachedNetworkImage(
+                  imageUrl: result.picture ??
+                      'https://us.123rf.com/450wm/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg',
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,6 +161,8 @@ class _getCard extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
+                        final matchesBloc =
+                            BlocProvider.of<MatchesBloc>(context);
                         Navigator.of(context).pushNamed(
                           '/map_page',
                         );
