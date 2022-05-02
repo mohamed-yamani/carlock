@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
+
   bool isLoggedIn = true;
   await Hive.initFlutter(); //!hive init
   Hive.registerAdapter(TokenModelAdapter()); //!hive register adapter
@@ -76,7 +77,7 @@ class _MyAppState extends State<MyApp> {
               ),
           '/map_page': (context) => BlocProvider.value(
                 value: matchesBloc,
-                child: const MapPage(),
+                child: MapSample(),
               ),
         },
       ),

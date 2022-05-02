@@ -129,8 +129,9 @@ class _getCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                
                 CachedNetworkImage(
+                  key: Key(result.id.toString()),
+                  cacheKey: result.id.toString(),
                   imageUrl: result.picture ??
                       'https://us.123rf.com/450wm/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg',
                   placeholder: (context, url) =>
@@ -147,9 +148,10 @@ class _getCard extends StatelessWidget {
                       children: const [
                         CircleAvatar(
                           backgroundColor: Colors.grey,
-                          backgroundImage: NetworkImage(
-                            'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
-                          ),
+                          backgroundImage: CachedNetworkImageProvider(
+                              'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
+                              cacheKey: 'f00cf06bbb48a178c56f1269c038cdf6.jpg'),
+                          key: ValueKey('f00cf06bbb48a178c56f1269c038cdf6.jpg'),
                           radius: 25,
                         ),
                       ],
@@ -161,17 +163,16 @@ class _getCard extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        final matchesBloc =
-                            BlocProvider.of<MatchesBloc>(context);
                         Navigator.of(context).pushNamed(
                           '/map_page',
                         );
                       },
                       child: const CircleAvatar(
                         backgroundColor: Colors.grey,
-                        backgroundImage: NetworkImage(
-                          'https://img.phonandroid.com/2016/04/comment-utiliser-google-maps-gps.jpg',
-                        ),
+                        backgroundImage: CachedNetworkImageProvider(
+                            'https://img.phonandroid.com/2016/04/comment-utiliser-google-maps-gps.jpg',
+                            cacheKey: 'comment-utiliser-google-maps-gps.jpg'),
+                        key: Key('comment-utiliser-google-maps-gps.jpg'),
                         radius: 25,
                       ),
                       // child: Container(

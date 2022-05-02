@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carlock/presentation/matches/bloc/bloc/matches_bloc.dart';
 import 'package:carlock/repository/save_get_token.dart';
 import 'package:carlock/services/matches.dart';
@@ -137,11 +138,15 @@ class NavBar extends StatelessWidget {
       accountEmail: const Text('_'),
       currentAccountPicture: CircleAvatar(
         child: ClipOval(
-          child: Image.network(
-            'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
-            width: 90,
-            height: 90,
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
             fit: BoxFit.cover,
+            height: 90,
+            width: 90,
           ),
         ),
       ),
@@ -168,16 +173,23 @@ class NavBar extends StatelessWidget {
         ),
         child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
           TypewriterAnimatedText(
-              'Hello ${state.user.user[0].toUpperCase() + state.user.user.substring(1)}'),
+              'Salut ${state.user.user[0].toUpperCase() + state.user.user.substring(1)}'),
+          TypewriterAnimatedText('carlock est un service de ...'),
         ]),
       ),
       currentAccountPicture: CircleAvatar(
         child: ClipOval(
-          child: Image.network(
-            'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
-            width: 90,
-            height: 90,
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://i.pinimg.com/originals/f0/0c/f0/f00cf06bbb48a178c56f1269c038cdf6.jpg',
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
             fit: BoxFit.cover,
+            height: 90,
+            width: 90,
+            key: const ValueKey('f00cf06bbb48a178c56f1269c038cdf6.jpg'),
+            cacheKey: 'f00cf06bbb48a178c56f1269c038cdf6.jpg',
           ),
         ),
       ),
