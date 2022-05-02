@@ -34,8 +34,8 @@ dependencies:
   equatable:
   hive:
   cached_network_image: 
-  flutter_map: ^0.14.0
-  
+  google_maps_flutter: ^2.1.4
+  latlng: ^0.1.0
   hive_flutter:
   animated_text_kit: 
   connectivity_plus: ^2.3.0 

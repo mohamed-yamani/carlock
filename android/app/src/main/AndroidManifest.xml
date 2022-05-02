@@ -12,6 +12,8 @@
         android:label="carlock"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBf8-cic241rojL1Fl3eCSqXXFjAIkQoZ0"/>
         
         <activity
             android:name=".MainActivity"
