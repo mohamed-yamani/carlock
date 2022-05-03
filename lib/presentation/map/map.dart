@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:print_color/print_color.dart';
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
@@ -23,8 +24,8 @@ class MapSampleState extends State<MapSample> {
         ),
         position: LatLng(32.8821743, -6.897816),
         infoWindow: InfoWindow(
-          title: 'Marker 1',
-          snippet: 'This is a marker',
+          title: '1337',
+          snippet: 'This is my home',
         ),
       ));
     });
@@ -40,10 +41,25 @@ class MapSampleState extends State<MapSample> {
           GoogleMap(
             initialCameraPosition: const CameraPosition(
               target: LatLng(32.8821743, -6.897816),
-              zoom: 16,
+              zoom: 14,
             ),
             onMapCreated: _onMapCreated,
             markers: Set<Marker>.of(_markers),
+            onTap: (LatLng latLng) {
+              setState(() {
+                Print.red('Tapped on $latLng');
+                // _markers.add(Marker(
+                //   markerId: MarkerId(
+                //     'marker_id_${_markers.length + 1}',
+                //   ),
+                //   position: latLng,
+                //   infoWindow: InfoWindow(
+                //     title: 'Marker',
+                //     snippet: 'This is my home',
+                //   ),
+                // ));
+              });
+            },
           ),
           const ReturnButton(),
           const ButtonText(),
@@ -62,11 +78,16 @@ class ButtonText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.bottomCenter,
-      child: const Padding(
-        padding: EdgeInsets.only(bottom: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
         child: Text(
-          '1337 future is loading',
-          style: TextStyle(color: Colors.black),
+          'carlock',
+
+          // '1337 future is loading',
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );
